@@ -18,6 +18,8 @@ import sys, re, random, ctypes
 from PyQt5 import QtCore, QtGui, QtWidgets 
 from PyQt5 import uic
 from matplotlib import pyplot
+import numpy as np
+
 
 modelos=[]#Objetivo a alcanzar
 # ND: Para una funcíon, calcular según formula
@@ -38,7 +40,7 @@ probMutac=0  #La probabilidad de que un individuo mute
 
 detalles=[]#almacenara en cada iteracion todo lo sucedido en  la iteracion
 x=[]
-y=[] # almacenara la sumatoria de todos los individuos en  la iteracion
+yy=[] # almacenara la sumatoria de todos los individuos en  la iteracion
 
 class Ui_Dialog(object):
 	
@@ -301,9 +303,9 @@ class Ui_Dialog(object):
     		d=len(detalles)
     		for x in range(d):
     			detalles.pop()
-    		for r in range(len(y)):
+    		for r in range(len(yy)):
     			x.pop()
-    			y.pop()
+    			yy.pop()
                 
                 
 
@@ -413,7 +415,7 @@ class Ui_Dialog(object):
     				for q in range(len(poblacion[x])): #cantidad de bits de cada individuo
     					sumatoria+=int(poblacion[x][q]) #realiza la suma de cada uno de los bits de todos los individuos de esa iteracion
     			x.append(x)
-    			y.append(suma)#almacena en el vector plot el resultado de la suma
+    			yy.append(suma)#almacena en el vector plot el resultado de la suma
 
                 
                 
@@ -433,7 +435,9 @@ class Ui_Dialog(object):
 
 
     def val_grafica(self):
-    	pyplot.plot(([1, 2, 3, 4], [1, 4, 9, 16])
+    	w=np.array([1, 4, 9, 16])
+    	ww=np.array([1, 4, 9, 16])
+    	pyplot.plot(w, ww)
     	pyplot.show()
     	
 
