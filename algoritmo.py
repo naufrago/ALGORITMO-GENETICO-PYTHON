@@ -39,7 +39,7 @@ probMutac=0  #La probabilidad de que un individuo mute
 # Esta probabilidad se aplica por cromosoma.. error
 
 detalles=[]#almacenara en cada iteracion todo lo sucedido en  la iteracion
-x=[]
+xx=[]
 yy=[] # almacenara la sumatoria de todos los individuos en  la iteracion
 
 class Ui_Dialog(object):
@@ -226,6 +226,7 @@ class Ui_Dialog(object):
         self.grafica = QtWidgets.QPushButton(Dialog)
         self.grafica.setGeometry(QtCore.QRect(200, 550, 51, 23))
         self.grafica.setObjectName("grafica")
+        self.grafica.setEnabled(False)
 
         self.lind.textChanged.connect(self.validar_lind)
         self.modelo.textChanged.connect(self.validar_modelo)
@@ -304,20 +305,19 @@ class Ui_Dialog(object):
     		for x in range(d):
     			detalles.pop()
     		for r in range(len(yy)):
-    			x.pop()
+    			xx.pop()
     			yy.pop()
-                
-                
 
 
+    		self.grafica.setEnabled(True)
+                
             
-                
-
     		self.tpoblacion.setEnabled(False)
     		self.npadres.setEnabled(False)
     		self.pmutacion.setEnabled(False)
     		self.dtallesiter.setEnabled(True)
     		self.iter.setEnabled(True)
+            
     		#print("\n\nModelo: %s\n"%(modelos))
 
     		lInd= int(self.lind.text())
@@ -411,20 +411,14 @@ class Ui_Dialog(object):
     			detalles.append(total)
     			detalles2=""
     			sumatoria = 0
-    			for x in range(len(poblacion)): # cantidad de individuos
-    				for q in range(len(poblacion[x])): #cantidad de bits de cada individuo
-    					sumatoria+=int(poblacion[x][q]) #realiza la suma de cada uno de los bits de todos los individuos de esa iteracion
-    			x.append(x)
-    			yy.append(suma)#almacena en el vector plot el resultado de la suma
+    			for s in range(len(poblacion)): # cantidad de individuos
+    				for q in range(len(poblacion[s])): #cantidad de bits de cada individuo
+    					sumatoria=sumatoria+int(poblacion[s][q])
 
-                
-                
-                    
-                    
-                        
-                
+    			xx.append(int(x+1))
+    			yy.append(sumatoria)#almacena en el vector plot el resultado de la suma
 
-                        
+                      
                    
 
     		self.solucion.setText(str(poblacion))
@@ -435,9 +429,12 @@ class Ui_Dialog(object):
 
 
     def val_grafica(self):
-    	w=np.array([1, 4, 9, 16])
-    	ww=np.array([1, 4, 9, 16])
-    	pyplot.plot(w, ww)
+    	w=np.array(xx)
+    	ww=np.array(yy)
+    	pyplot.plot(w, ww,  marker='o')
+    	pyplot.title("comportamiento  de la sumatoria de los bit del los individuos\nde la poblacion hallada  en cada iteracion")   # Establece el título del gráfico
+    	pyplot.xlabel("iteraciones")   # Establece el título del eje x 
+    	pyplot.ylabel("sumatoria de cada poblacion")   # Establece el título del eje y
     	pyplot.show()
     	
 
@@ -544,17 +541,22 @@ class Ui_Dialog(object):
     	for x in range(d):
     		detalles.pop()
 
+    	self.lind.setEnabled(True)
+    	self.grafica.setEnabled(False)
+
     	lInd =0
     	tamano =0
     	padres=0
     	probMutac=0 
     	self.dtallesiter.setEnabled(False)
     	self.iter.setEnabled(False)
+        
     	self.modelo.setEnabled(True)
     	self.asignar.setEnabled(True)
     	self.tpoblacion.setEnabled(True)
     	self.npadres.setEnabled(True)
     	self.pmutacion.setEnabled(True)
+        #
     	self.solucion.setText("")
     	self.lind.setText("0")
     	self.cmodelo.setText("0")
