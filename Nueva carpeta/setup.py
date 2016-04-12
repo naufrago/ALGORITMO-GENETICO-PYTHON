@@ -5,7 +5,7 @@ from cx_Freeze import setup, Executable
 build_exe_options = {'packages': [], 'excludes' : []}
 base = 'Win32GUI'
 exe = Executable(
-    script = 'algoritmo.py',
+    script = 'algoritmocongrafica.py',
     initScript = None,
     base = 'Win32GUI',
     targetName = 'MedicaidAid.exe',
@@ -19,4 +19,4 @@ setup( name = 'MedicaidAid',
         version = '0.85',
         description = 'MedicaidAid Software',
         options = {'build_exe': build_exe_options},
-        executables = [Executable('algoritmo.py', base = base)])
+        executables = [Executable('algoritmocongrafica.py', base = base)])
