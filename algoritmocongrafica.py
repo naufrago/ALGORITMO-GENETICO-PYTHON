@@ -8,6 +8,7 @@
 #coding: iso-8859-1
 #*********algoritmos geneticos *********
 #@uthor: NAUFRAGO(Yeison Aguirre Osorio )
+##@uthor: johany vargas )
 #22 marzo 2016
 #***************************************
 
